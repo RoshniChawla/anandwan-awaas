@@ -23,17 +23,18 @@ const HeroSection = ({
         backgroundImage: `linear-gradient(rgba(7, 19, 3, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }
     : {};
 
   return (
     <section
-      className={`relative py-24 ${
+      className={`relative min-h-screen flex items-center ${
         backgroundImage ? "text-white" : "bg-gradient-to-b from-primary-50 to-white"
       } ${className}`}
       style={backgroundStyle}
     >
-      <div className="container mx-auto px-2">
+      <div className="w-full px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6">
             {title}
@@ -43,6 +44,7 @@ const HeroSection = ({
               {subtitle}
             </p>
           )}
+
           {showButtons && (
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <Link to="/register">
@@ -64,6 +66,7 @@ const HeroSection = ({
               </Link>
             </div>
           )}
+
           {customContent && <div className="mt-8">{customContent}</div>}
         </div>
       </div>
@@ -71,4 +74,4 @@ const HeroSection = ({
   );
 };
 
-export default HeroSection; 
+export default HeroSection;
