@@ -1,4 +1,3 @@
-// adminRoutes.ts
 import express, { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -12,7 +11,6 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization'];
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    console.warn("🚫 No or malformed token:", authHeader);
     return res.status(401).json({ message: 'No token provided' });
   }
 
@@ -23,38 +21,62 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     (req as any).admin = decoded;
     next();
   } catch (err) {
-    console.error("❌ Invalid token:", err);
     return res.status(403).json({ message: 'Invalid token' });
   }
 };
 
-// Protected admin dashboard stats route
+// 🧠 Convert to start and end of current date in IST
+const getTodayRangeInIST = () => {
+  const now = new Date();
+
+  // Convert to IST offset
+  const IST_OFFSET = 5.5 * 60 * 60 * 1000;
+  const istNow = new Date(now.getTime() + IST_OFFSET);
+
+  // Set IST start of day
+  const start = new Date(istNow);
+  start.setHours(0, 0, 0, 0);
+
+  // Set IST end of day
+  const end = new Date(istNow);
+  end.setHours(23, 59, 59, 999);
+
+  // Convert back to UTC for MongoDB (since DB stores UTC)
+  return {
+    startUTC: new Date(start.getTime() - IST_OFFSET),
+    endUTC: new Date(end.getTime() - IST_OFFSET),
+  };
+};
+
+// ✅ Dashboard Stats Route with Full-Day Logic
 router.get('/dashboard-stats', verifyToken, async (req: Request, res: Response) => {
   try {
-    const currentDate = new Date();
+    const { startUTC, endUTC } = getTodayRangeInIST();
 
     const currentGuests = await Guest.countDocuments({
-      dateOfArrival: { $lte: currentDate },
-      dateOfDeparture: { $gte: currentDate }
+      arrivalDate: { $lte: endUTC },
+      departureDate: { $gte: startUTC },
     });
 
     const upcomingArrivals = await Guest.countDocuments({
-      dateOfArrival: { $gt: currentDate }
+      arrivalDate: { $gt: endUTC },
     });
 
     const totalBookings = await Guest.countDocuments();
 
-    const mealIncludedGuests = await Guest.countDocuments({ mealsIncluded: true });
+    const activePrograms = await Guest.countDocuments({
+      mealRequired: true,
+    });
 
     res.json({
-      currentGuests: currentGuests ?? 0,
-      upcomingArrivals: upcomingArrivals ?? 0,
-      totalBookings: totalBookings ?? 0,
-      activePrograms: mealIncludedGuests ?? 0 // renamed for frontend compatibility
+      currentGuests,
+      upcomingArrivals,
+      totalBookings,
+      activePrograms,
     });
   } catch (err: any) {
-    console.error("🔥 Dashboard stats error:", err);
-    res.status(500).json({ error: err.message });
+    console.error("Dashboard error:", err);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
