@@ -60,68 +60,68 @@ const HomePage = () => {
         />
 
         {/* Experience Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2B6747]">Experience Anandwan</h2>
-              <p className="text-lg max-w-3xl mx-auto text-[#2B6747]">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary-600">Experience Anandwan</h2>
+              <p className="text-lg max-w-3xl mx-auto text-foreground">
                 Founded by social worker Baba Amte, Anandwan is a community rehabilitation center and forest retreat where visitors can connect with nature, volunteer, and experience sustainable living.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
               {/* Nature Retreat */}
-              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="w-16 h-16 mx-auto mb-6 bg-[#2B6747] rounded-full flex items-center justify-center">
+              <div className="bg-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-border">
+                <div className="w-16 h-16 mx-auto mb-6 bg-primary-600 rounded-full flex items-center justify-center">
                   <MapPin className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-[#2B6747]">Nature Retreat</h3>
-                <p className="text-gray-600 mb-4">
+                <h3 className="text-xl font-bold mb-4 text-primary-600">Nature Retreat</h3>
+                <p className="text-muted-foreground mb-4">
                   Immerse yourself in the peaceful forest surroundings and reconnect with nature.
                 </p>
-                <Link to="/about" className="text-[#FF9130] hover:text-[#FF9130]/90 flex items-center gap-2">
+                <Link to="/about" className="text-accent-orange hover:text-accent-orange/90 flex items-center gap-2">
                   Learn more <span>→</span>
                 </Link>
               </div>
 
               {/* Community Living */}
-              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="w-16 h-16 mx-auto mb-6 bg-[#2B6747] rounded-full flex items-center justify-center">
+              <div className="bg-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-border">
+                <div className="w-16 h-16 mx-auto mb-6 bg-primary-600 rounded-full flex items-center justify-center">
                   <Users2 className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-[#2B6747]">Community Living</h3>
-                <p className="text-gray-600 mb-4">
+                <h3 className="text-xl font-bold mb-4 text-primary-600">Community Living</h3>
+                <p className="text-muted-foreground mb-4">
                   Experience a unique community that embraces diversity and promotes inclusion.
                 </p>
-                <Link to="/about" className="text-[#FF9130] hover:text-[#FF9130]/90 flex items-center gap-2">
+                <Link to="/about" className="text-accent-orange hover:text-accent-orange/90 flex items-center gap-2">
                   Learn more <span>→</span>
                 </Link>
               </div>
 
               {/* Volunteer */}
-              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="w-16 h-16 mx-auto mb-6 bg-[#2B6747] rounded-full flex items-center justify-center">
+              <div className="bg-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-border">
+                <div className="w-16 h-16 mx-auto mb-6 bg-primary-600 rounded-full flex items-center justify-center">
                   <Heart className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-[#2B6747]">Volunteer</h3>
-                <p className="text-gray-600 mb-4">
+                <h3 className="text-xl font-bold mb-4 text-primary-600">Volunteer</h3>
+                <p className="text-muted-foreground mb-4">
                   Contribute your skills and time to make a positive impact on the community.
                 </p>
-                <Link to="/guide" className="text-[#FF9130] hover:text-[#FF9130]/90 flex items-center gap-2">
+                <Link to="/guide" className="text-accent-orange hover:text-accent-orange/90 flex items-center gap-2">
                   How to volunteer <span>→</span>
                 </Link>
               </div>
 
               {/* Stay & Learn */}
-              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="w-16 h-16 mx-auto mb-6 bg-[#2B6747] rounded-full flex items-center justify-center">
+              <div className="bg-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-border">
+                <div className="w-16 h-16 mx-auto mb-6 bg-primary-600 rounded-full flex items-center justify-center">
                   <BookOpen className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-[#2B6747]">Stay & Learn</h3>
-                <p className="text-gray-600 mb-4">
+                <h3 className="text-xl font-bold mb-4 text-primary-600">Stay & Learn</h3>
+                <p className="text-muted-foreground mb-4">
                   Book accommodations and participate in workshops on sustainable living.
                 </p>
-                <Link to="/register" className="text-[#FF9130] hover:text-[#FF9130]/90 flex items-center gap-2">
+                <Link to="/register" className="text-accent-orange hover:text-accent-orange/90 flex items-center gap-2">
                   Book now <span>→</span>
                 </Link>
               </div>
@@ -130,16 +130,15 @@ const HomePage = () => {
         </section>
 
         {/* Image Carousel Section */}
-        <section className="py-10 bg-[rgba(246,244,240,255)]">
+        <section className="py-10 bg-muted">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-600">Glimpses of Anandwan</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Glimpses of Anandwan</h2>
               <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-              <p className="text-lg max-w-3xl mx-auto text-gray-700">
+              <p className="text-lg max-w-3xl mx-auto text-muted-foreground">
                 Explore the serene beauty and transformative experiences waiting for you at our retreat.
               </p>
             </div>
-
             <div className="max-w-2xl mx-auto h-[350px] rounded-xl overflow-hidden shadow-xl">
               <ImageCarousel images={carouselImages} />
             </div>
@@ -147,46 +146,46 @@ const HomePage = () => {
         </section>
 
         {/* Experience Section */}
-        <section className="py-16 bg-[rgba(254,255,254,255)]">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-600">Guest Experiences</h2>
-              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Hear from those who have experienced the transformation at Anandwan Awaas
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Testimonial 1 */}
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <p className="text-gray-700 mb-4 italic">
+              <div className="bg-card p-6 rounded-lg shadow-md border border-border">
+                <p className="text-muted-foreground mb-4 italic">
                   "My stay at Anandwan changed my perspective on life. The peaceful environment and community activities were truly transformative."
                 </p>
                 <div className="mt-4">
                   <p className="font-semibold text-primary-600">Priya Sharma</p>
-                  <p className="text-sm text-gray-600">Mumbai</p>
+                  <p className="text-sm text-muted-foreground">Mumbai</p>
                 </div>
               </div>
 
               {/* Testimonial 2 */}
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <p className="text-gray-700 mb-4 italic">
+              <div className="bg-card p-6 rounded-lg shadow-md border border-border">
+                <p className="text-muted-foreground mb-4 italic">
                   "I came here stressed and left rejuvenated. The staff is incredibly supportive and the nature walks are breathtaking."
                 </p>
                 <div className="mt-4">
                   <p className="font-semibold text-primary-600">Raj Patel</p>
-                  <p className="text-sm text-gray-600">Delhi</p>
+                  <p className="text-sm text-muted-foreground">Delhi</p>
                 </div>
               </div>
 
               {/* Testimonial 3 */}
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <p className="text-gray-700 mb-4 italic">
+              <div className="bg-card p-6 rounded-lg shadow-md border border-border">
+                <p className="text-muted-foreground mb-4 italic">
                   "As a volunteer, I found purpose in contributing to Anandwan's mission. It's a place where compassion meets action."
                 </p>
                 <div className="mt-4">
                   <p className="font-semibold text-primary-600">Meera Desai</p>
-                  <p className="text-sm text-gray-600">Pune</p>
+                  <p className="text-sm text-muted-foreground">Pune</p>
                 </div>
               </div>
             </div>

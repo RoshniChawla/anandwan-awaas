@@ -83,14 +83,14 @@ const DonatePage = () => {
 
   return (
     <Layout>
-      <div className="bg-neutral-beige min-h-screen py-12">
+      <div className="bg-background min-h-screen py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Support Our Mission</h1>
+            <div className="text-center mb-12 bg-muted py-12 rounded-xl">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Support Our Mission</h1>
               <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-              <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Your contribution helps us maintain and expand our programs while keeping our services accessible to all. 
                 Every donation makes a difference in our community.
               </p>
@@ -99,14 +99,14 @@ const DonatePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Donation Form */}
               {!isCompleted ? (
-                <div className="glassmorphism rounded-lg overflow-hidden order-2 md:order-1">
+                <div className="glassmorphism rounded-lg overflow-hidden order-2 md:order-1 bg-card border border-border">
                   <div className="p-8">
-                    <h2 className="text-2xl font-bold mb-6">Make a Donation</h2>
+                    <h2 className="text-2xl font-bold mb-6 text-foreground">Make a Donation</h2>
                     
                     <form onSubmit={handleSubmit} className="space-y-6">
                       {/* Donation Type */}
                       <div>
-                        <Label className="mb-2 block">Donation Type</Label>
+                        <Label className="mb-2 block text-foreground">Donation Type</Label>
                         <RadioGroup
                           value={donationType}
                           onValueChange={setDonationType}
@@ -114,35 +114,34 @@ const DonatePage = () => {
                         >
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="one-time" id="one-time" />
-                            <Label htmlFor="one-time" className="font-normal">One-time</Label>
+                            <Label htmlFor="one-time" className="font-normal text-foreground">One-time</Label>
                           </div>
                           <div className="flex items-center space-x-2">
                             <RadioGroupItem value="monthly" id="monthly" />
-                            <Label htmlFor="monthly" className="font-normal">Monthly</Label>
+                            <Label htmlFor="monthly" className="font-normal text-foreground">Monthly</Label>
                           </div>
                         </RadioGroup>
                       </div>
                       
                       {/* Amount Selection */}
                       <div>
-                        <Label className="mb-2 block">Select Amount</Label>
+                        <Label className="mb-2 block text-foreground">Select Amount</Label>
                         <div className="grid grid-cols-3 gap-2 mb-3">
-                          {["500", "1000", "2500", "5000", "10000", "custom"].map((option) => (
+                          {['500', '1000', '2500', '5000', '10000', 'custom'].map((option) => (
                             <Button
                               key={option}
                               type="button"
-                              variant={amount === option ? "default" : "outline"}
-                              className={amount === option ? "bg-primary-500" : ""}
+                              variant={amount === option ? 'default' : 'outline'}
+                              className={amount === option ? 'bg-primary-500 text-white' : ''}
                               onClick={() => handleAmountSelect(option)}
                             >
-                              {option === "custom" ? "Custom" : `₹${option}`}
+                              {option === 'custom' ? 'Custom' : `₹${option}`}
                             </Button>
                           ))}
                         </div>
-                        
-                        {amount === "custom" && (
+                        {amount === 'custom' && (
                           <div className="mt-3">
-                            <Label htmlFor="customAmount">Enter Amount (₹)</Label>
+                            <Label htmlFor="customAmount" className="text-foreground">Enter Amount (₹)</Label>
                             <Input
                               id="customAmount"
                               type="number"
@@ -154,11 +153,10 @@ const DonatePage = () => {
                           </div>
                         )}
                       </div>
-                      
                       {/* Personal Information */}
                       <div className="space-y-4">
                         <div>
-                          <Label htmlFor="fullName">Full Name</Label>
+                          <Label htmlFor="fullName" className="text-foreground">Full Name</Label>
                           <Input
                             id="fullName"
                             placeholder="Enter your full name"
@@ -168,9 +166,8 @@ const DonatePage = () => {
                             className="mt-1"
                           />
                         </div>
-                        
                         <div>
-                          <Label htmlFor="email">Email</Label>
+                          <Label htmlFor="email" className="text-foreground">Email</Label>
                           <Input
                             id="email"
                             type="email"
@@ -181,9 +178,8 @@ const DonatePage = () => {
                             className="mt-1"
                           />
                         </div>
-                        
                         <div>
-                          <Label htmlFor="message">Message (Optional)</Label>
+                          <Label htmlFor="message" className="text-foreground">Message (Optional)</Label>
                           <Textarea
                             id="message"
                             placeholder="Share why you're supporting us"
@@ -194,29 +190,27 @@ const DonatePage = () => {
                           />
                         </div>
                       </div>
-                      
                       <Button
                         type="submit"
                         className="w-full bg-accent-orange hover:bg-accent-orange/90 text-white"
                         disabled={isLoading}
                       >
-                        {isLoading ? "Processing..." : "Complete Donation"}
+                        {isLoading ? 'Processing...' : 'Complete Donation'}
                       </Button>
-                      
-                      <p className="text-xs text-gray-500 text-center pt-2">
+                      <p className="text-xs text-muted-foreground text-center pt-2">
                         Your donation is eligible for tax benefits under applicable laws.
                       </p>
                     </form>
                   </div>
                 </div>
               ) : (
-                <div className="glassmorphism rounded-lg overflow-hidden order-2 md:order-1">
+                <div className="glassmorphism rounded-lg overflow-hidden order-2 md:order-1 bg-card border border-border">
                   <div className="p-8 text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
                       <CheckCircle className="h-8 w-8 text-green-500" />
                     </div>
-                    <h2 className="text-2xl font-bold mb-4">Thank You!</h2>
-                    <p className="text-gray-700 mb-6">
+                    <h2 className="text-2xl font-bold mb-4 text-foreground">Thank You!</h2>
+                    <p className="text-muted-foreground mb-6">
                       Your donation has been successfully processed. We've sent a confirmation to your email with the receipt and tax information.
                     </p>
                     <p className="text-lg font-medium text-primary-600 mb-6">
@@ -228,46 +222,40 @@ const DonatePage = () => {
                   </div>
                 </div>
               )}
-              
               {/* Impact Information */}
               <div className="order-1 md:order-2">
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
                   <div className="p-8">
-                    <h2 className="text-2xl font-bold mb-6">Your Impact</h2>
-                    
+                    <h2 className="text-2xl font-bold mb-6 text-foreground">Your Impact</h2>
                     <div className="space-y-6">
                       <div className="border-l-4 border-primary-500 pl-4">
-                        <h3 className="text-lg font-bold mb-2">Forest Conservation</h3>
-                        <p className="text-gray-700">
+                        <h3 className="text-lg font-bold mb-2 text-foreground">Forest Conservation</h3>
+                        <p className="text-muted-foreground">
                           Your donation helps protect and restore forest ecosystems, supporting biodiversity and carbon sequestration efforts.
                         </p>
                       </div>
-                      
                       <div className="border-l-4 border-primary-500 pl-4">
-                        <h3 className="text-lg font-bold mb-2">Community Development</h3>
-                        <p className="text-gray-700">
+                        <h3 className="text-lg font-bold mb-2 text-foreground">Community Development</h3>
+                        <p className="text-muted-foreground">
                           Contributions fund educational programs, vocational training, and sustainable livelihood initiatives for local communities.
                         </p>
                       </div>
-                      
                       <div className="border-l-4 border-primary-500 pl-4">
-                        <h3 className="text-lg font-bold mb-2">Wellness Centers</h3>
-                        <p className="text-gray-700">
+                        <h3 className="text-lg font-bold mb-2 text-foreground">Wellness Centers</h3>
+                        <p className="text-muted-foreground">
                           Your support helps maintain our wellness facilities and ensures holistic health services remain accessible to all.
                         </p>
                       </div>
-                      
                       <div className="border-l-4 border-primary-500 pl-4">
-                        <h3 className="text-lg font-bold mb-2">Sustainable Infrastructure</h3>
-                        <p className="text-gray-700">
+                        <h3 className="text-lg font-bold mb-2 text-foreground">Sustainable Infrastructure</h3>
+                        <p className="text-muted-foreground">
                           Donations help develop and maintain eco-friendly facilities that minimize our environmental footprint.
                         </p>
                       </div>
                     </div>
-                    
-                    <div className="mt-8 bg-neutral-beige p-4 rounded-lg">
-                      <h3 className="text-lg font-bold mb-2">Transparency Promise</h3>
-                      <p className="text-gray-700">
+                    <div className="mt-8 bg-muted p-4 rounded-lg">
+                      <h3 className="text-lg font-bold mb-2 text-foreground">Transparency Promise</h3>
+                      <p className="text-muted-foreground">
                         We're committed to transparency in how we use donations. Detailed financial reports are published annually and available to all supporters.
                       </p>
                     </div>

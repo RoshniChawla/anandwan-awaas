@@ -56,19 +56,19 @@ const AdminLoginPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen flex items-center justify-center bg-neutral-beige py-12 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4">
         <div className="max-w-md w-full">
-          <div className="glassmorphism rounded-lg overflow-hidden">
+          <div className="glassmorphism rounded-lg overflow-hidden bg-card border border-border">
             <div className="p-8">
               <div className="text-center mb-8">
-                <h1 className="text-3xl font-bold">Admin Login</h1>
-                <p className="text-gray-600 mt-2">Sign in to access the dashboard</p>
+                <h1 className="text-3xl font-bold text-foreground">Admin Login</h1>
+                <p className="text-muted-foreground mt-2">Sign in to access the dashboard</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
                   <div>
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email" className="text-foreground">Email</Label>
                     <Input
                       id="email"
                       type="email"
@@ -82,7 +82,7 @@ const AdminLoginPage = () => {
 
                   <div>
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="password">Password</Label>
+                      <Label htmlFor="password" className="text-foreground">Password</Label>
                       <a href="#" className="text-sm text-primary-600 hover:text-primary-500">
                         Forgot password?
                       </a>
@@ -111,7 +111,7 @@ const AdminLoginPage = () => {
               </form>
 
               <div className="mt-6 text-center text-sm">
-                <p className="text-gray-600">
+                <p className="text-muted-foreground">
                   Not an administrator?{" "}
                   <a href="/" className="font-medium text-primary-600 hover:text-primary-500">
                     Return to homepage

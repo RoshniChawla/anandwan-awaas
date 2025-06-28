@@ -46,12 +46,12 @@ const TeamPage = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative py-20">
+      <section className="relative py-20 bg-muted">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Team</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">Our Team</h1>
             <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-            <p className="text-lg text-gray-700 mb-8">
+            <p className="text-lg text-muted-foreground mb-8">
               Meet the dedicated individuals who make Anandwan Awaas a transformative experience.
             </p>
           </div>
@@ -59,11 +59,11 @@ const TeamPage = () => {
       </section>
 
       {/* Team Members Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {teamMembers.map((member, index) => (
-              <div key={index} className="glassmorphism rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div key={index} className="glassmorphism rounded-lg overflow-hidden hover:shadow-xl transition-shadow bg-card border border-border">
                 <div className="h-48 overflow-hidden">
                   <img
                     src={member.image}
@@ -72,9 +72,9 @@ const TeamPage = () => {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-bold mb-1">{member.name}</h3>
+                  <h3 className="text-lg font-bold mb-1 text-foreground">{member.name}</h3>
                   <p className="text-primary-600 font-medium mb-2 text-sm">{member.role}</p>
-                  <p className="text-gray-700 text-xs mb-3 line-clamp-4">{member.bio}</p>
+                  <p className="text-muted-foreground text-xs mb-3 line-clamp-4">{member.bio}</p>
                   {member.contact && (
                     <a
                       href={`mailto:${member.contact}`}
@@ -91,10 +91,10 @@ const TeamPage = () => {
       </section>
 
       {/* Volunteer Section */}
-      <section className="py-16" style={{ backgroundColor: 'rgba(246,244,240,1)' }}>
-        <div className="container mx-auto px-4 text-center text-gray-800">
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4 text-center text-foreground">
           <h2 className="text-3xl font-bold mb-4">Volunteer With Us</h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-lg mb-8 max-w-2xl mx-auto text-muted-foreground">
             Can't join full-time? Consider volunteering! We offer various opportunities for individuals who want to contribute to our mission while gaining valuable experience.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -107,7 +107,7 @@ const TeamPage = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-gray-800 text-gray-800 hover:bg-gray-800/10"
+                className="border-border text-foreground hover:bg-muted"
               >
                 Register Now
               </Button>

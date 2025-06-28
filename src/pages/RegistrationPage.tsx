@@ -91,16 +91,16 @@ const RegistrationPage = () => {
 
   return (
     <Layout>
-      <div className="bg-neutral-beige min-h-screen py-12">
+      <div className="bg-background min-h-screen py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             {isSubmitted ? (
-              <div className="bg-white rounded-lg p-8 shadow-lg text-center">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="bg-card rounded-lg p-8 shadow-lg text-center border border-border">
+                <div className="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
                   <CheckCircle className="h-12 w-12 text-green-500" />
                 </div>
-                <h2 className="text-2xl font-bold mb-4">Registration Successful!</h2>
-                <p className="text-gray-700 mb-6">
+                <h2 className="text-2xl font-bold mb-4 text-foreground">Registration Successful!</h2>
+                <p className="text-muted-foreground mb-6">
                   Thank you for registering with Anandwan Awaas. We've sent a confirmation email to your inbox with all the details of your registration. Our team will review your submission and get in touch with you shortly.
                 </p>
                 <Button onClick={() => window.location.href = "/"} className="bg-primary-500 hover:bg-primary-600 text-white">
@@ -108,17 +108,16 @@ const RegistrationPage = () => {
                 </Button>
               </div>
             ) : (
-              <div className="glassmorphism rounded-lg overflow-hidden">
+              <div className="glassmorphism rounded-lg overflow-hidden bg-card border border-border">
                 <div className="p-8">
-                  <h1 className="text-3xl font-bold mb-2">Guest Registration</h1>
-                  <p className="text-gray-700 mb-6">
+                  <h1 className="text-3xl font-bold mb-2 text-foreground">Guest Registration</h1>
+                  <p className="text-muted-foreground mb-6">
                     Fill out the form below to register as a guest at Anandwan Awaas.
                   </p>
-
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="fullName">Full Name <span className="text-red-500">*</span></Label>
+                        <Label htmlFor="fullName" className="text-foreground">Full Name <span className="text-red-500">*</span></Label>
                         <Input
                           id="fullName"
                           name="fullName"
@@ -129,10 +128,9 @@ const RegistrationPage = () => {
                           className="mt-1"
                         />
                       </div>
-
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
+                          <Label htmlFor="email" className="text-foreground">Email <span className="text-red-500">*</span></Label>
                           <Input
                             id="email"
                             name="email"
@@ -144,9 +142,8 @@ const RegistrationPage = () => {
                             className="mt-1"
                           />
                         </div>
-
                         <div>
-                          <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
+                          <Label htmlFor="phone" className="text-foreground">Phone Number <span className="text-red-500">*</span></Label>
                           <Input
                             id="phone"
                             name="phone"
@@ -158,9 +155,8 @@ const RegistrationPage = () => {
                           />
                         </div>
                       </div>
-
                       <div>
-                        <Label htmlFor="purpose">Purpose of Visit <span className="text-red-500">*</span></Label>
+                        <Label htmlFor="purpose" className="text-foreground">Purpose of Visit <span className="text-red-500">*</span></Label>
                         <Select
                           onValueChange={(value) => handleSelectChange("purpose", value)}
                           value={formData.purpose}
@@ -177,10 +173,9 @@ const RegistrationPage = () => {
                           </SelectContent>
                         </Select>
                       </div>
-
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <Label>Date of Arrival <span className="text-red-500">*</span></Label>
+                          <Label className="text-foreground">Date of Arrival <span className="text-red-500">*</span></Label>
                           <Popover>
                             <PopoverTrigger asChild>
                               <Button variant="outline" className="w-full mt-1 justify-start text-left font-normal">
@@ -199,9 +194,8 @@ const RegistrationPage = () => {
                             </PopoverContent>
                           </Popover>
                         </div>
-
                         <div>
-                          <Label>Date of Departure <span className="text-red-500">*</span></Label>
+                          <Label className="text-foreground">Date of Departure <span className="text-red-500">*</span></Label>
                           <Popover>
                             <PopoverTrigger asChild>
                               <Button variant="outline" className="w-full mt-1 justify-start text-left font-normal">
@@ -215,90 +209,55 @@ const RegistrationPage = () => {
                                 selected={formData.departureDate}
                                 onSelect={(date) => handleDateChange("departureDate", date)}
                                 initialFocus
-                                disabled={(date) => date < new Date() || (formData.arrivalDate ? date < formData.arrivalDate : false)}
+                                disabled={(date) => date < (formData.arrivalDate || new Date())}
                               />
                             </PopoverContent>
                           </Popover>
                         </div>
                       </div>
-
-                      <div className="space-y-4">
-                        <div className="flex items-center space-x-2">
-                          <Checkbox
-                            id="mealRequired"
-                            checked={formData.mealRequired}
-                            onCheckedChange={(checked) =>
-                              setFormData(prev => ({ ...prev, mealRequired: checked as boolean }))
-                            }
-                          />
-                          <Label htmlFor="mealRequired">Include meals during stay</Label>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label>Booking Type <span className="text-red-500">*</span></Label>
-                          <Select
-                            onValueChange={(value) => {
-                              handleSelectChange("groupType", value);
-                              if (value === "single") {
-                                handleSelectChange("groupSize", "1");
-                              }
-                            }}
-                            value={formData.groupType}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select booking type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="single">Single</SelectItem>
-                              <SelectItem value="group">Group</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        {formData.groupType === "group" && (
-                          <div className="space-y-2">
-                            <Label>Number of People <span className="text-red-500">*</span></Label>
-                            <Select
-                              onValueChange={(value) => handleSelectChange("groupSize", value)}
-                              value={formData.groupSize}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select group size" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {[2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                                  <SelectItem key={num} value={num.toString()}>
-                                    {num} People
-                                  </SelectItem>
-                                ))}
-                                <SelectItem value="more">More than 10 (Contact us)</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                        )}
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="mealRequired"
+                          checked={formData.mealRequired}
+                          onCheckedChange={(checked) => setFormData(prev => ({ ...prev, mealRequired: !!checked }))}
+                        />
+                        <Label htmlFor="mealRequired" className="text-muted-foreground">Include meals during stay</Label>
+                      </div>
+                      <div>
+                        <Label htmlFor="groupType" className="text-foreground">Booking Type <span className="text-red-500">*</span></Label>
+                        <Select
+                          onValueChange={(value) => handleSelectChange("groupType", value)}
+                          value={formData.groupType}
+                        >
+                          <SelectTrigger className="mt-1">
+                            <SelectValue placeholder="Select booking type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="single">Single</SelectItem>
+                            <SelectItem value="group">Group</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="specialRequests" className="text-foreground">Special Requests or Notes</Label>
+                        <Textarea
+                          id="specialRequests"
+                          name="specialRequests"
+                          placeholder="Any special requests, dietary preferences, or additional information we should know"
+                          value={formData.specialRequests || ""}
+                          onChange={handleChange}
+                          className="mt-1"
+                          rows={3}
+                        />
                       </div>
                     </div>
-
-                    <div>
-                      <Label htmlFor="specialRequests">Special Requests or Notes</Label>
-                      <Textarea
-                        id="specialRequests"
-                        name="specialRequests"
-                        placeholder="Any special requests, dietary preferences, or additional information we should know"
-                        className="mt-1"
-                        rows={4}
-                      />
-                    </div>
-
-                    <div className="pt-4">
-                      <Button
-                        type="submit"
-                        className="w-full bg-primary-500 hover:bg-primary-600 text-white"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Submitting..." : "Submit Registration"}
-                      </Button>
-                    </div>
+                    <Button
+                      type="submit"
+                      className="w-full bg-primary-600 hover:bg-primary-700 text-white"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit Registration"}
+                    </Button>
                   </form>
                 </div>
               </div>
