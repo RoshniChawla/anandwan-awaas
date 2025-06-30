@@ -1,4 +1,3 @@
-
 import { FacilityData } from "@/types/admin";
 import FacilityCard from "../FacilityCard";
 import {
@@ -10,12 +9,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { enUS } from 'date-fns/locale';
 
 interface OverviewTabProps {
   facilities: FacilityData[];
   recentGuests: any[];
   upcomingEvents: any[];
 }
+
+const locales = {
+  'en-US': enUS,
+};
 
 const OverviewTab = ({ facilities, recentGuests, upcomingEvents }: OverviewTabProps) => {
   return (

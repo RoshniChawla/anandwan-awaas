@@ -17,6 +17,10 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Layout from "../components/Layout";
+import BookingAnalyticsTab from "@/components/admin/tabs/BookingAnalyticsTab";
+import GuestsTab from "@/components/admin/tabs/GuestsTab";
+import CalendarTab from "@/components/admin/tabs/CalendarTab";
+import DonorInfoTab from "@/components/admin/tabs/DonorInfoTab";
 
 interface Facility {
   name: string;
@@ -38,6 +42,7 @@ const AdminDashboardPage = () => {
   const [selectedFacility, setSelectedFacility] = useState<Facility | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("dashboard");
 
   const [statsCards, setStatsCards] = useState([
     {
@@ -59,7 +64,7 @@ const AdminDashboardPage = () => {
       bgColor: "bg-[#2B6747]",
     },
     {
-      title: "Active Programs",
+      title: "Meal Required",
       count: "-",
       icon: <Settings className="h-6 w-6 text-white" />,
       bgColor: "bg-[#7EB693]",
@@ -219,7 +224,7 @@ const AdminDashboardPage = () => {
             bgColor: "bg-[#2B6747]",
           },
           {
-            title: "Active Programs",
+            title: "Meal Required",
             count: activePrograms.toString(),
             icon: <Settings className="h-6 w-6 text-white" />,
             bgColor: "bg-[#7EB693]",
@@ -237,34 +242,48 @@ const AdminDashboardPage = () => {
 
   return (
     <Layout>
-      <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <div className="w-64 bg-[#2B6747] text-white p-6 relative">
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold mb-1">Anandwan Awaas</h1>
-            <p className="text-sm opacity-80">Admin Dashboard</p>
-          </div>
-
-          <nav className="space-y-2">
-            {navItems.map(({ name, icon, to }) => (
-              <NavLink
-                key={name}
-                to={to}
-                className={({ isActive }) =>
-                  `flex items-center space-x-3 p-3 rounded-lg ${
-                    isActive ? "bg-white/10 font-semibold" : "hover:bg-white/10"
-                  }`
-                }
+      <div className="flex min-h-screen bg-background">
+        {/* Vertical Tabs Sidebar */}
+        <div className="w-64 bg-card text-foreground flex flex-col justify-between py-8 border-r border-border">
+          <div>
+            <h1 className="text-2xl font-bold mb-8 px-6">Anandwan Awaas</h1>
+            <nav className="flex flex-col gap-2 px-4">
+              <button
+                className={`text-left px-4 py-3 rounded-lg font-semibold transition-colors ${activeTab === "dashboard" ? "bg-muted" : "hover:bg-muted/60"}`}
+                onClick={() => setActiveTab("dashboard")}
               >
-                {React.cloneElement(icon, { className: "h-5 w-5" })}
-                <span>{name}</span>
-              </NavLink>
-            ))}
-          </nav>
-
-          <div className="absolute bottom-8 left-6 w-[90%]">
+                Summary
+              </button>
+              <button
+                className={`text-left px-4 py-3 rounded-lg font-semibold transition-colors ${activeTab === "analytics" ? "bg-muted" : "hover:bg-muted/60"}`}
+                onClick={() => setActiveTab("analytics")}
+              >
+                Booking Analytics
+              </button>
+              <button
+                className={`text-left px-4 py-3 rounded-lg font-semibold transition-colors ${activeTab === "guests" ? "bg-muted" : "hover:bg-muted/60"}`}
+                onClick={() => setActiveTab("guests")}
+              >
+                Guest Management
+              </button>
+              <button
+                className={`text-left px-4 py-3 rounded-lg font-semibold transition-colors ${activeTab === "calendar" ? "bg-muted" : "hover:bg-muted/60"}`}
+                onClick={() => setActiveTab("calendar")}
+              >
+                Calendar View
+              </button>
+              <button
+                className={`text-left px-4 py-3 rounded-lg font-semibold transition-colors ${activeTab === "donors" ? "bg-muted" : "hover:bg-muted/60"}`}
+                onClick={() => setActiveTab("donors")}
+              >
+                Donor Info
+              </button>
+            </nav>
+          </div>
+          {/* User Info and Sign Out at the bottom */}
+          <div className="px-6">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-white/20"></div>
+              <div className="w-10 h-10 rounded-full bg-muted"></div>
               <div>
                 <p className="font-medium">Arjun Mehta</p>
                 <p className="text-sm opacity-80">Administrator</p>
@@ -272,42 +291,50 @@ const AdminDashboardPage = () => {
             </div>
             <button
               onClick={() => navigate("/")}
-              className="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/10 w-full"
+              className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/60 w-full"
             >
               <LogOut className="h-5 w-5" />
               <span>Sign Out</span>
             </button>
           </div>
         </div>
-
         {/* Main Content */}
-        <div className="flex-1 p-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-[#2B6747] mb-2">Dashboard</h1>
-            <p className="text-[#2B6747]">
+        <div className="flex-1 p-12">
+          <div className="mb-12">
+            <h1 className="text-4xl font-extrabold text-foreground mb-2 tracking-tight">Dashboard</h1>
+            <p className="text-foreground text-lg font-medium">
               Welcome back, Arjun. Here's what's happening at Anandwan Awaas today.
             </p>
           </div>
-
-          {loading ? (
-            <p className="text-[#2B6747] text-lg font-medium">Loading stats...</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              {statsCards.map((card, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className={`w-12 h-12 ${card.bgColor} rounded-full flex items-center justify-center`}
-                    >
-                      {card.icon}
+          {/* Tab Content */}
+          {activeTab === "dashboard" && (
+            loading ? (
+              <p className="text-foreground text-lg font-medium">Loading stats...</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 mt-8">
+                {statsCards.map((card, index) => (
+                  <div
+                    key={index}
+                    className="bg-card rounded-2xl p-8 shadow-xl flex flex-col items-center justify-center min-h-[180px] min-w-[220px] transition-transform duration-200 hover:scale-105 hover:shadow-2xl border border-border"
+                  >
+                    <div className="flex items-center justify-center mb-6">
+                      <div
+                        className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-md bg-gradient-to-br from-primary to-muted-foreground/80 ${index === 1 ? 'from-yellow-300 to-orange-400' : ''}`}
+                      >
+                        {card.icon}
+                      </div>
                     </div>
-                    <h3 className="text-3xl font-bold text-[#2B6747]">{card.count}</h3>
+                    <h3 className="text-4xl font-extrabold text-foreground mb-2 tracking-tight drop-shadow-sm">{card.count}</h3>
+                    <p className="text-lg text-foreground font-semibold tracking-wide text-center">{card.title}</p>
                   </div>
-                  <p className="text-[#2B6747]">{card.title}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )
           )}
+          {activeTab === "analytics" && <BookingAnalyticsTab />}
+          {activeTab === "guests" && <GuestsTab />}
+          {activeTab === "calendar" && <CalendarTab />}
+          {activeTab === "donors" && <DonorInfoTab />}
         </div>
       </div>
     </Layout>

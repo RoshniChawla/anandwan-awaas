@@ -29,7 +29,7 @@ const Navbar = () => {
             <img 
               src="/public/anandwaan .jpg"
               alt="Anandwan Awaas Logo" 
-              className="h-30 w-30"
+              className="h-20 w-20 rounded-full object-cover border-2 border-primary"
             />
           </Link>
 
